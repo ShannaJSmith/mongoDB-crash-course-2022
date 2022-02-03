@@ -3,7 +3,10 @@ const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/users');
 
+const cors = require('cors');
+
 app.use(express.json());
+app.use(cors());
 
 mongoose.connect(
   'mongodb+srv://Test:418763@cluster0.dyqhe.mongodb.net/sample_airbnb?retryWrites=true&w=majority'
