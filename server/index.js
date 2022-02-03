@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const UserModel = require('./models/users');
+
+app.use(express.json());
+
 mongoose.connect(
   'mongodb+srv://Test:418763@cluster0.dyqhe.mongodb.net/sample_airbnb?retryWrites=true&w=majority'
 );
@@ -16,7 +19,14 @@ app.get('/getUsers', (req, res) => {
     }
   });
 });
-// app.post()
+
+app.post('/createUser', async (req, res) => {
+  const user = req.body;
+  const newUser = new UserModel(user);
+  //save function available with mongoose
+  await newUser.save();
+  res.json(user);
+});
 
 app.listen(3001, () => {
   console.log('SEVER IS RUNNING');
