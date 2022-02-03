@@ -22,15 +22,17 @@ function App() {
         username,
       })
       .then((response) => {
-        alert('USER CREATED');
+        // allows for refresh not to be needed.
+        // adds new user to the end of the list of users
+        setListOfUsers([...listOfUsers, { name, age, username }]);
       });
   };
   return (
     <div className="App">
       <div className="usersDisplay">
-        {listOfUsers.map((user) => {
+        {listOfUsers.map((user, index) => {
           return (
-            <div>
+            <div key={index}>
               <h1>Name: {user.name}</h1>
               <h1>Age: {user.age}</h1>
               <h1>Username: {user.username}</h1>
